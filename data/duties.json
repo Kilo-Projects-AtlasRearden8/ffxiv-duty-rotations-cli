@@ -1,0 +1,13 @@
+{
+  "duties": [
+    {"id": "dungeon_stone_vigil", "name": "Stone Vigil", "category": "dungeon", "weekly_cap": null},
+    {"id": "dungeon_brayflox", "name": "Brayflox's Longstop", "category": "dungeon", "weekly_cap": null},
+    {"id": "trial_ifrit", "name": "Trial: Ifrit", "category": "trial", "weekly_cap": null},
+    {"id": "trial_titan", "name": "Trial: Titan", "category": "trial", "weekly_cap": null},
+    {"id": "raid_coil_bahamut", "name": "The Binding Coil of Bahamut", "category": "raid", "weekly_cap": 1},
+    {"id": "raid_turn_bahamut", "name": "The Final Steps of Bahamut", "category": "raid", "weekly_cap": 1},
+    {"id": "raid_savage_t1", "name": "Savage Raid: Tier 1", "category": "raid", "weekly_cap": 1},
+    {"id": "raid_ultimate_t1", "name": "Ultimate Raid: Tier 1", "category": "raid", "weekly_cap": 1},
+    {"id": "dungeon_mythic_t1", "name": "Mythic Dungeon: Tier 1", "category": "dungeon", "weekly_cap": 3}
+  ]
+}
