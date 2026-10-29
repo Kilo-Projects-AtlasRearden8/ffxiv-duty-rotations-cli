@@ -18,18 +18,19 @@ from pathlib import Path
 
 # FFXIV weekly reset day: Tuesday (1 = Monday ... 6 = Sunday in ISO weekday).
 RESET_WEEKDAY = 1
+VERSION = "1.0.0"
 
 DEFAULT_REGISTRY = {
     "duties": [
-        {"id": "dungeon_leveling_01", "name": "Stone Vigil", "category": "dungeon", "weekly_cap": None},
-        {"id": "dungeon_leveling_02", "name": "Brayflox's Longstop", "category": "dungeon", "weekly_cap": None},
+        {"id": "dungeon_stone_vigil", "name": "Stone Vigil", "category": "dungeon", "weekly_cap": None},
+        {"id": "dungeon_brayflox", "name": "Brayflox's Longstop", "category": "dungeon", "weekly_cap": None},
         {"id": "trial_ifrit", "name": "Trial: Ifrit", "category": "trial", "weekly_cap": None},
         {"id": "trial_titan", "name": "Trial: Titan", "category": "trial", "weekly_cap": None},
         {"id": "raid_coil_bahamut", "name": "The Binding Coil of Bahamut", "category": "raid", "weekly_cap": 1},
         {"id": "raid_turn_bahamut", "name": "The Final Steps of Bahamut", "category": "raid", "weekly_cap": 1},
-        {"id": "raid_savage_01", "name": "Savage Raid: Tier 1", "category": "raid", "weekly_cap": 1},
-        {"id": "raid_ultimate_01", "name": "Ultimate Raid: Tier 1", "category": "raid", "weekly_cap": 1},
-        {"id": "dungeon_mythic_01", "name": "Mythic Dungeon: Tier 1", "category": "dungeon", "weekly_cap": 3},
+        {"id": "raid_savage_t1", "name": "Savage Raid: Tier 1", "category": "raid", "weekly_cap": 1},
+        {"id": "raid_ultimate_t1", "name": "Ultimate Raid: Tier 1", "category": "raid", "weekly_cap": 1},
+        {"id": "dungeon_mythic_t1", "name": "Mythic Dungeon: Tier 1", "category": "dungeon", "weekly_cap": 3},
     ]
 }
 
@@ -295,6 +296,7 @@ def cmd_export(args) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="ffxiv_duty", description="Log FFXIV duty and trial completions, track lockouts and weekly caps.")
+    parser.add_argument("--version", action="version", version=f"%(prog)s {VERSION}")
     sub = parser.add_subparsers(dest="command", required=True)
 
     p_log = sub.add_parser("log", help="Log a duty or trial completion")

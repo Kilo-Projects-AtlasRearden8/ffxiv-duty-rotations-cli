@@ -1,17 +1,21 @@
 # FFXIV Duty & Trial Log
 
-A local-first Python CLI for FFXIV players to log duty and trial completions,
-track weekly lockouts and caps, and plan the week ahead. Data stays on your
-machine in plain JSON, and you can export it to CSV or JSON whenever you like.
-
-No game assets, no network access, no accounts, no secrets. Just a small tool
-to help you keep track of your weekly rhythm in Eorzea.
+A friendly, local-first Python command line tool for Final Fantasy XIV players.
+Log your duty and trial completions, keep track of weekly lockouts and caps, and
+plan what's still available before the weekly reset — all on your own computer,
+with nothing sent anywhere.
 
 ## Who this is for
 
-FFXIV players who want a simple, private way to remember which duties they ran
-this week, which are locked out, and what's still available before the weekly
-reset. Built to be beginner-friendly: plain commands, no setup beyond Python.
+This is for FFXIV players who want a simple, private way to remember:
+
+- Which duties and trials they ran this week
+- Which ones are locked out because they hit the weekly cap
+- What's still open to run before reset on Tuesday
+
+It's built to be beginner-friendly: plain commands, no accounts, no setup
+beyond having Python on your computer. If you can type a command, you can use
+this tool.
 
 ## Credit
 
@@ -25,69 +29,84 @@ Square Enix or the Final Fantasy XIV team. No game assets are included.
 
 ## Features
 
-- Log duty and trial completions with a timestamp (`log`)
-- View your completion history (`list`)
-- See weekly lockout status for every duty (`lockouts`)
-- Track weekly cap progress (`caps`)
-- Plan which duties are still available this week (`plan`)
-- Export your log to JSON or CSV (`export`)
-- Everything stored locally in `data/` as plain JSON; no external services
+- **Log** a duty or trial completion with a timestamp
+- **List** your completion history, newest first
+- **Lockouts** — see lockout status for every duty (weekly cap reached or open)
+- **Caps** — see how close you are to each weekly cap
+- **Plan** — see which duties are still available this week
+- **Export** your log to JSON or CSV so you can open it in a spreadsheet
+- Everything stored locally in plain JSON files; no network, no accounts, no
+  secrets
 
 ## Requirements
 
-Python 3.8 or later. No external packages.
-
-## Install
-
-There is nothing to install. Run the module directly:
-
-```
-python3 ffxiv_duty.py --help
-```
+Python 3.8 or later. No external packages to install.
 
 ## Quick start
 
+Run the tool straight from the folder:
+
+```bash
+python3 ffxiv_duty.py --help
 ```
-# See lockout status for all duties (weekly resets Tuesdays UTC)
+
+See what's locked this week (weekly resets on Tuesdays UTC):
+
+```bash
 python3 ffxiv_duty.py lockouts
+```
 
-# Log a completion
+Log a completion:
+
+```bash
 python3 ffxiv_duty.py log raid_savage_t1 --at 2026-10-27T10:00:00+00:00
+```
 
-# See what's still available this week
+See what's still available to run:
+
+```bash
 python3 ffxiv_duty.py plan
+```
 
-# Export your log
+Export your log to a spreadsheet-friendly CSV:
+
+```bash
 python3 ffxiv_duty.py export my_duties.csv
 ```
 
 ## Commands
 
-- `log DUTY_ID [--at ISO]` — log a completion (defaults to now)
-- `list [--duty ID] [--limit N]` — list completions, newest first
-- `lockouts [--at ISO]` — lockout status for every registered duty
-- `caps [--at ISO]` — weekly cap usage per duty
-- `plan [--at ISO]` — duties not yet capped this week
-- `export FILE.json|FILE.csv` — export the full log
+| Command | What it does |
+|---------|--------------|
+| `log DUTY_ID [--at ISO]` | Log a completion (defaults to now) |
+| `list [--duty ID] [--limit N]` | List completions, newest first |
+| `lockouts [--at ISO]` | Lockout status for every registered duty |
+| `caps [--at ISO]` | Weekly cap usage per duty |
+| `plan [--at ISO]` | Duties not yet capped this week |
+| `export FILE.json\|FILE.csv` | Export the full log |
+| `--version` | Show the version number |
 
 ## Data
 
 The tool creates a `data/` folder next to the script:
 
-- `data/duties.json` — duty registry with names, categories, and weekly caps
-- `data/duty_log.json` — your completion log (created when you first log)
+- `data/duties.json` — the duty registry (names, categories, weekly caps). You
+  can edit this to add or change duties.
+- `data/duty_log.json` — your completion log, created the first time you log a
+  completion.
 
-You can edit `data/duties.json` to add or change duties. Point
-`FFXIV_DUTY_DATA_DIR` at another folder to store data elsewhere.
+To store your data somewhere else, set the `FFXIV_DUTY_DATA_DIR` environment
+variable to the folder you want.
 
 ## Tests
 
-```
+The lockout math is covered by automated tests:
+
+```bash
 python3 -m pytest
 ```
 
-Tests cover the lockout math: weekly windows, caps, lock status, and remaining
-counts.
+Tests check weekly windows, caps, lock status, and remaining counts.
 
 ## License
 
